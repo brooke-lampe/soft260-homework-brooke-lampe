@@ -31,5 +31,5 @@ Submission Instructions
 
 3. Edit the LaTeX.  You can compile it in Atom by pressing control-alt-b.
 
-4. Add, commit, and push the `.tex` file.  We do not need the non-source code
+4. Add, commit, and push the `.tex` file.  We do not need the non-source-code
    files.
