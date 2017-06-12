@@ -1,0 +1,39 @@
+\errorcontextlines=8
+
+\documentclass{article}
+
+\widowpenalty=10000
+\clubpenalty=10000
+
+\usepackage{fullpage}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+
+\headheight=14pt
+\headsep=16pt
+\makeatletter
+\lhead{\@date}
+\chead{\@title}
+\rhead{\@author}
+\makeatother
+
+\parindent=0pt
+\parskip=6pt
+
+\usepackage{alltt}
+\newenvironment{pseudocode}
+  {\begin{quote}\begin{alltt}\normalfont}
+  {\end{alltt}\end{quote}}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+
+\begin{document}
+
+\title{Homework~X.Y}
+\author{\dots}
+\date{August~XX,~20YY}
+
+\dots % Write content here.
+
+\end{document}

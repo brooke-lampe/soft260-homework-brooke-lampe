@@ -1,0 +1,114 @@
+% LaTeX variables and commands usually start with a backslash (\):
+%     \example
+% Characters like a tilde (~), underscore (_), or caret (^) are also commands.
+% Arguments longer than one character are written in curlies ({ and }):
+%     \example{first argument}{second argument}
+
+% A LaTeX file begins with a prelude containing imports and settings.
+% The actual content starts after the \begin{document} (on line 52).
+
+% Show up to 8 layers of macro expansion (backtrace) when an error is hit.
+% Atom will hide these details, but they'll still appear in the log file.
+\errorcontextlines=8
+
+% Choose a document class.
+\documentclass{article}
+
+% Don't allow widows or club lines (a.k.a. orphans).
+\widowpenalty=10000
+\clubpenalty=10000
+
+% Use full pages with headers and footers.
+\usepackage{fullpage}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+
+% Base the header on the document's date, title, and author.
+\headheight=14pt
+\headsep=16pt
+\makeatletter
+\lhead{\@date}
+\chead{\@title}
+\rhead{\@author}
+\makeatother
+
+% Set up paragraph formatting.
+\parindent=0pt
+\parskip=6pt
+
+% Provide a lightweight pseudocode environment.
+\usepackage{alltt}
+\newenvironment{pseudocode}
+  {\begin{quote}\begin{alltt}\normalfont}
+  {\end{alltt}\end{quote}}
+
+% Inport common math commands.
+\usepackage{amsmath}
+\usepackage{amssymb}
+
+
+% The part between \begin{document} and \end{document} is the actual content.
+% Make your changes here.
+\begin{document}
+
+% Set the title, author, and date.
+% If you leave out the date command, LaTeX will use the current date.
+\title{Homework~X.Y}
+\author{Ada~Lovelace}
+\date{August~XX,~20YY}
+
+% \paragraph creates a paragraph caption; you can use it for problem numbers.
+% Blank lines separate paragraphs.
+\paragraph{1.} This is a paragraph.
+
+This is another paragraph.
+This is another sentence in the second paragraph.
+
+% Content between \( and \) is typeset as inline math.
+% Content between \[ and \] is typeset as display math.
+% \le is ≤, \ge is ≥, and \ne is ≠.
+% \cdot is · and \frac creates a fraction.
+% We use extra spaces so LaTeX doesn't think j is part of a command name.
+\paragraph{2.} Relational operators: \(i<j\), \(i\le j\), \(i=j\), \(i\ge j\),
+\(i>j\), and \(i\ne j\).  Nonrelational binary operators:
+
+\[a+b-c\cdot\frac{d}{e}\]
+
+% \log creates a logarithm.
+% \sum creates a summation.
+% \int creates an integral, and \, creates the space before its differential.
+% \left. and \right\rvert surround an evaluated-at expression.
+% \lim creates a limit, and \to is "goes-to", normally \rightarrow (→).
+% _ creates a subscript and ^ creates a superscript.
+\paragraph{3.} Some expressions: \(\log_2 n\), \(\sum_{i=0}^{n-1}i^2\),
+\(\int_{-10}^{10}x\,dx\), \(\left.\frac{x^2}{2}\right\rvert_{-10}^{10}\), and
+\(\lim_{x\to\infty}x\).
+
+% \Theta and \Omega are capital Greek letters.
+% \left( and \right) are parentheses that grow to match their contents.
+\paragraph{4.} Asymptotics: \(O\left(\frac{n}{\log n}\right)\),
+\(\Theta\left(\frac{n}{\log n}\right)\), and
+\(\Omega\left(\frac{n}{\log n}\right)\).
+
+% \text places text inside of math; just \(foo\) would be f times o times o.
+% \varnothing is Ø.
+% \{ and \} are curly braces.
+% \ldots is ….
+% \left\lvert and \right\rvert are vertical bars for cardinality.
+\paragraph{5.} \(\text{foo}(0)=\varnothing\) and
+\(\left\lvert\{0\ldots n-1\}\right\rvert=n\).
+
+\paragraph{6.} This algorithm prints the numbers from one to 21, inclusive:
+
+% Using this template, \begin{pseudocode} and \end{pseudocode} will format
+%   simple pseudocode.  More advanced pseudocode packages like algorithm2e are
+%   also available.
+% \in is ∈.
+% \gets is an assignment, normally \leftarrow (←).
+\begin{pseudocode}
+  for \(i\in[0\ldots 20]\):
+    \(j\gets i+1\)
+    \(\text{print}(j)\)
+\end{pseudocode}
+
+\end{document}
