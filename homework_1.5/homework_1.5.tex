@@ -1,0 +1,482 @@
+\errorcontextlines=8
+
+\documentclass{article}
+
+\widowpenalty=10000
+\clubpenalty=10000
+
+\usepackage{fullpage}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+
+\headheight=14pt
+\headsep=16pt
+\makeatletter
+\lhead{\@date}
+\chead{\@title}
+\rhead{\@author}
+\makeatother
+
+\parindent=0pt
+\parskip=6pt
+
+\usepackage{alltt}
+\newenvironment{pseudocode}
+  {\begin{quote}\begin{alltt}\normalfont}
+  {\end{alltt}\end{quote}}
+
+\usepackage{enumerate}
+\usepackage{color}
+\usepackage{rotating}
+\usepackage{epsfig}  %EPS graphic package
+\usepackage{amsmath} %AMSMath font package
+\usepackage{amssymb} %AMSMath symbol package
+\usepackage{amsthm}  %Mathematical environment package
+\usepackage{booktabs}   %Tables package
+\usepackage[usenames,dvipsnames,svgnames,table]{xcolor} %Colors package
+
+%Define commands
+\newcommand{\problem}{\vspace{.5cm}\textbf{Problem:~~}}
+\newcommand{\answer}{\vspace{.25cm}\emph{Answer:~~}}
+
+\begin{document}
+
+\title{Homework~1.2}
+\author{Brooke Lampe}
+\date{August~24,~2017}
+
+%problems
+\textbf{Problem 1.}
+
+\hspace{0ex}	\textbf{function} mystery($A$)
+
+\hspace{4ex}		\textbf{Input:}  $A$, a list of numbers
+
+\hspace{4ex}		$n \leftarrow |A|$
+
+\hspace{4ex}		$b \leftarrow 0$
+
+\hspace{4ex}		\textbf{for} $i \in [n - 1 ... 0]$ \textbf{do}
+
+\hspace{8ex}			$b \leftarrow A[i] - b$
+
+\hspace{4ex}		\textbf{return} $b$
+
+
+\textbf{Problem 2.}
+
+\hspace{0ex}	\textbf{function} increase($A, n, max$)
+
+\hspace{4ex}		\textbf{Input:}  $A$, a list of numbers; $n$, an integer (the number of elements to check); $max$, a double (the current maximum increase between two consecutive elements)
+
+\hspace{4ex}		\textbf{if} $n > 1$ \textbf{then}
+
+\hspace{8ex}			$diff \leftarrow A[n - 1] - A[n - 2]$
+
+\hspace{8ex}			\textbf{if} $diff > max$ \textbf{then}
+
+\hspace{12ex}				$max \leftarrow diff$
+
+\hspace{8ex}			\textbf{if} $n = 2$ \textbf{then}
+
+\hspace{12ex}				\textbf{return} $max$
+
+\hspace{8ex}			\textbf{return} increase($A, n - 1, max$)
+
+\hspace{4ex}		\textbf{return} $-\infty$
+	
+\newpage
+
+
+\textbf{Problem 3.}
+
+\hspace{0ex}	\textbf{function} sum($A, maxSum$)
+
+\hspace{4ex}		\textbf{Input}: $A$, a list of numbers; $maxSum$, a double (the current maximum prefix sum)
+
+\hspace{4ex}		$n \leftarrow |A|$
+
+\hspace{4ex}		\textbf{if} $n > 1$ \textbf{then}
+
+\hspace{8ex}			$A[1] \leftarrow A[0] + A[1]$
+
+\hspace{8ex}			\textbf{if} $A[1] > maxSum$ \textbf{then}
+
+\hspace{12ex}				$maxSum \leftarrow A[1]$
+
+\hspace{8ex}			\textbf{if} $n = 2$ \textbf{then}
+
+\hspace{12ex}				\textbf{return} ($A[1], maxSum$)
+
+\hspace{8ex}			$B \leftarrow A[1 ... n - 1]$
+
+\hspace{8ex}			\textbf{return} sum($B, maxSum$)
+
+\hspace{4ex}		\textbf{else if} $n = 1$
+
+\hspace{8ex}			\textbf{return} ($A[0], A[0]$)
+
+\hspace{4ex}		\textbf{return} ($0, 0$)
+
+
+\newpage
+
+\textbf{Problem 4.}
+
+\hspace{0ex}	\textbf{function} sum($A$)
+
+\hspace{4ex}		\textbf{Input}: $A$, a list of numbers
+
+\hspace{4ex}		$n \leftarrow |A|$
+
+\hspace{4ex}		\textbf{if} $n = 2$ \textbf{then}
+
+\hspace{8ex}			$totalSum \leftarrow A[0] + A[1]$
+
+\hspace{8ex}			$maxSum \leftarrow A[0]$
+
+\hspace{8ex}			\textbf{if} $totalSum > maxSum$ \textbf{then}
+
+\hspace{12ex}				$maxSum \leftarrow totalSum$
+
+\hspace{8ex}			\textbf{return} ($totalSum, maxSum$)
+
+\hspace{4ex}		\textbf{if} $n = 3$ \textbf{then}
+
+\hspace{8ex}			$totalSum \leftarrow A[0] + A[1] + A[2]$
+
+\hspace{8ex}			$maxSum \leftarrow A[0]$
+
+\hspace{8ex}			\textbf{if} $A[0] + A[1] > maxSum$ \textbf{then}
+
+\hspace{12ex}				$maxSum \leftarrow A[0] + A[1]$
+
+\hspace{8ex}			\textbf{if} $totalSum > maxSum$ \textbf{then}
+
+\hspace{12ex}				$maxSum \leftarrow totalSum$
+
+\hspace{8ex}			\textbf{return} ($totalSum, maxSum$)
+
+\hspace{4ex}			\textbf{if} $n > 3$ \textbf{then}
+
+\hspace{8ex}			$index \leftarrow \lfloor n/2 \rfloor$
+
+\hspace{8ex}			$B \leftarrow A[0 ... index - 1]$
+
+\hspace{8ex}			$C \leftarrow A[index ... n - 1]$
+
+\hspace{8ex}			$b \leftarrow$ sum($B$)
+
+\hspace{8ex}			$c \leftarrow$ sum($C$)
+
+\hspace{8ex}			$totalSum \leftarrow b[0] + c[0]$
+
+\hspace{8ex}			$maxSum \leftarrow b[1]$
+
+\hspace{8ex}			\textbf{if} $b[0] + c[1] > maxSum$ \textbf{then}
+
+\hspace{12ex}				$maxSum \leftarrow b[0] + c[1]$
+
+\hspace{8ex}			\textbf{return} ($totalSum, maxSum$)
+
+\newpage
+
+	
+\textbf{Problem 5.}
+
+	\textbf{Backward Substitution}
+
+	$T(n) = 3 T(n - 1) + 2$
+	
+	$ = 3 (3 T(n - 2) + 2) + 2$
+	
+	$ = 9 T(n - 2) + 8$
+	
+	$ = 9 (3 T(n - 3) + 2) + 8$
+	
+	$ = 27 T(n - 3) + 26$
+	
+	$ = 27 (3 T(n - 4) + 2) + 26$
+	
+	$ = 81 T(n - 4) + 80$
+	
+	...
+	
+	$3^n T(n - n) + 3^n - 1$
+	
+	$3^n (1) + 3^n - 1$
+	
+	$2 \times 3^n - 1$
+	
+	\textbf{Verify}
+	
+	$T(n) = 3 (2 \times 3^{n - 1} - 1) + 2$
+	
+	$ = 6 \times 3^{n - 1} - 3 + 2$
+	
+	$ = 6 \times 3^{n - 1} - 1$
+	
+	$ = 6 \times 3^n \times 3^{-1} - 1$
+	
+	$ = 6/3 \times 3^n - 1$
+	
+	$ = 2 \times 3^n - 1$
+	
+	
+\newpage
+
+\textbf{Problem 6.}
+
+	\textbf{Backward Substitution}
+
+	$T(n) = T(n - 1) + 2n - 1$
+	
+	$ = (T(n - 2) + 2n - 1) + 2n - 1$
+	
+	$ = T(n - 2) + 4n - 2$
+	
+	$ = (T(n - 3) + 2n - 1) + 4n - 2$
+	
+	$ = T(n - 3) + 6n - 3$
+	
+	$ = (T(n - 4) + 2n - 1) + 6n - 3$
+	
+	$ = T(n - 4) + 8n - 4$
+	
+	...
+	
+	$ = (T(n - n) + 2(n)(n) - n$
+	
+	$ = T(n - n) + 2n^2 - n$
+	
+	$ = 2n^2 - n$
+	
+	\textbf{Verify}
+	
+	$T(n) = 2(n - 1)^2 - (n - 1) + 2n - 1$
+	
+	$ = 2(n^2 - 2n + 1) - n + 1 + 2n - 1$
+	
+	$ = 2n^2 - 4n + 2 + n$
+	
+	$ = 2n^2 - 3n + 2$
+	
+	\textbf{Unable to Verify; Incorrect}
+	
+	\textbf{Forward Substitution}
+	
+	$T(0) = 0$
+	
+	$T(1) = T(0) + 2(1) - 1 = 0 + 2 - 1 = 1$
+	
+	$T(2) = T(1) + 2(2) - 1 = 1 + 4 - 1 = 4$
+	
+	$T(3) = T(2) + 2(3) - 1 = 4 + 6 - 1 = 9$
+	
+	$T(4) = T(3) + 2(4) - 1 = 9 + 8 - 1 = 16$
+	
+	...
+	
+	$T(n) = n^2$
+	
+	\textbf{Verify}
+	
+	$T(n) = (n - 1)^2 + 2n - 1$
+	
+	$ = (n^2 - 2n + 1) + 2n - 1$
+	
+	$ = n^2$
+	
+	
+	
+\newpage
+
+\textbf{Problem 7.}
+
+	\textbf{Forward Substitution}
+
+	$T(n) = T(\lfloor n/2 \rfloor) + T(\lceil n/2 \rceil) + 1$
+	
+	$T(0) = 2(0) - 1 = -1$
+	
+	$T(1) = 2(1) - 1 = 1$
+	
+	$T(2) = T(1) + T(1) + 1 = 1 + 1 + 1 = 3$
+	
+	$T(3) = T(1) + T(2) + 1 = 1 + 3 + 1 = 5$
+	
+	$T(4) = T(2) + T(2) + 1 = 3 + 3 + 1 = 7$
+	
+	...
+	
+	$T(n) = 2n - 1$
+	
+	\textbf{Verify}
+	
+	$T(n) = (2(\lfloor n/2 \rfloor) - 1) + (2(\lceil n/2 \rceil) - 1) + 1$
+	
+	Asymptotically, ceiling and floor functions do not have an impact, so we remove them.
+	
+	$ = (2 (n/2) - 1) + (2 (n/2) - 1) + 1$
+	
+	$ = (n - 1) + (n - 1) + 1$
+	
+	$ = 2n - 2 + 1$
+	
+	$ = 2n - 1$
+	
+	
+\newpage
+
+\textbf{Problem 8.}
+
+	\begin{enumerate}[a.]
+		\item Input size ($n$): $|A|$.
+		
+		\item Basic operation: The addition in line 5.
+		
+		\item This is a single recurrence algorithm.
+		
+		\item The basic operation is performed once each time the areaHelper function is called, except in the base case, in which the basic operation is not performed at all.
+		
+		Thus, we have:
+		
+		$\{T(n) = 1 + T(n - 1)$ if $n > 0$; $T(n) = 0$ otherwise$\}$
+		
+		Using backward substitution, we have:
+		
+		$T(n) = 1 + T(n - 1)$
+		
+		$ = 1 + 1 + T(n - 2)$
+		
+		$ = 2 + T(n - 2)$
+		
+		$ = 2 + 1 + T(n - 3)$
+		
+		$ = 3 + T(n - 3)$
+		
+		...
+		
+		$ = n + T(n - n)$
+		
+		$ = n + 0$
+		
+		$ = n$
+		
+		\textbf{Verify}
+		
+		$T(n) = 1 + (n - 1)$
+		
+		$T(n) = n$
+		
+		This algorithm is $\Theta(n)$; that is, this algorithm has linear asymptotic time complexity.
+	\end{enumerate}
+
+
+\newpage
+
+\textbf{Problem 9.}
+
+	\begin{enumerate}[a.]
+		\item Input size ($n$): $|A|$.
+		
+		\item Basic operations: The addition in line 4 and the subtraction in line 8.
+		
+		\item This is a multiple (double) recurrence algorithm.
+		
+		\item The basic operation is performed once each time area is called, but area is recursively called twice each time $(2^n)$.  Each time area is called, $n$ is halved $(log_{2}(n))$.
+		
+		Thus, we have:
+		
+		$T(n) = T(\lfloor n/2 \rfloor) + T(\lceil n/2 \rceil) + 1$ if $n > 2$; $T(n) = 1$ if $n = 3$; $T(n) = 0$ otherwise$\}$
+		
+		Using forward substitution, we have:
+		
+		$T(0) = 0$
+		
+		$T(1) = 0$
+		
+		$T(2) = 0$
+		
+		$T(3) = 1$
+		
+		$T(4) = T(2) + T(2) + 1 = 0 + 0 + 1 = 1$
+		
+		$T(5) = T(2) + T(3) + 1 = 0 + 1 + 1 = 2$
+		
+		$T(6) = T(3) + T(3) + 1 = 1 + 1 + 1 = 3$
+		
+		$T(7) = T(3) + T(4) + 1 = 1 + 1 + 1 = 3$
+		
+		$T(8) = T(4) + T(4) + 1 = 1 + 1 + 1 = 3$
+		
+		$T(9) = T(4) + T(5) + 1 = 1 + 2 + 1 = 4$
+		
+		$T(10) = T(5) + T(5) + 1 = 2 + 2 + 1 = 5$
+		
+		$T(11) = T(5) + T(6) + 1 = 2 + 3 + 1 = 6$
+		
+		$T(12) = T(6) + T(6) + 1 = 3 + 3 + 1 = 7$
+		
+		...
+		
+		$T(n) = n - 5$
+		
+		\textbf{Verify}
+		
+		$T(n) = ((\lfloor n/2 \rfloor) - 5) + ((\lceil n/2 \rceil) - 5) + 1$
+		
+		Asymptotically, ceiling and floor functions do not have an impact, so we remove them.
+		
+		$ = ((n/2) - 5) + ((n/2) - 5) + 1$
+		
+		$ = n - 5 - 5 + 1$
+		
+		$ = n - 9$
+		
+		Though $n - 5$, our estimate, is not the same as $n - 9$, they are both linear functions, which indicates that the solution to the recurrence relation is a linear function.
+		
+		This algorithm is $\Theta(n)$; that is, this algorithm has linear asymptotic time complexity.
+		
+		\item This algorithm is neither asymptotically faster or slower than the algorithm in Question 8.  Both algorithms are $\Theta(n)$; that is, they both have linear asymptotic time complexity, so they are asymptotically the same.
+	\end{enumerate}
+
+\textbf{Problem 10.}
+
+	Input size ($n$): $|A|$.
+	
+	Basic operation: Addition in line 5. 
+
+	\begin{enumerate}[a.]
+		\item Best case time complexity (base case):
+		
+			If $|A| < 2$, then we have a base case which will return 0, giving constant time complexity ($\Theta(1)$).
+			
+			Best case time complexity (non-base case):
+		
+			Essentially, this algorithm computes the mean of a set of numbers and then recurses to compute the mean of the numbers in the set of numbers that were less than the original mean.  In the best case, the number of values above the mean and the number of values below the mean should be approximately the same each time the algorithm is recursively called ($log_{2}(n)$).  Thus, the number of computations is halved each time.  Because the recursion includes a loop which iterates through the length of the list, which is halved, the basic operation is computed $log_{2}(n)$ times each time the algorithm recurses.
+			
+			Thus, the best case time complexity of the algorithm is $log_{2}(n) \times log_{2}(n)$; that is, $(log_{2}(n))^2$.
+			
+			$(log_{2}(n))^2$ is in $O(n)$, so the best case time complexity is within linear time.
+		
+		\item Worst case time complexity:
+		
+		In the worst case, each successive number in the list would be significantly larger than the sum of the previous numbers (say, triple or quadruple), such that only one number is eliminated from the list in each recursive call.  In such a scenario, the mean would only be smaller than one number.  In that case, a recursive call will be made approximately $n$ times, once to eliminate each element.  Consequently, the loop in line 4 will decline much more slowly, iterating one less each time.
+		
+		Thus, we have:
+		
+		$n \sum_{i = 2}^{(n + 1) - 1}(1) = $
+		
+		$ = n(i) \rvert_{2}^{n + 1}$
+		
+		$ = n(n + 1) - n(2)$
+		
+		$ = n^2 + n - 2n$
+		
+		$ = n^2 - n$
+		
+		The worst case time complexity is $\Theta(n^2)$
+	\end{enumerate}
+
+\end{document}
